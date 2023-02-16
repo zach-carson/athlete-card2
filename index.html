@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="Description" content="Put your description here.">
+  <base href="/">
+
+  <style>
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: sans-serif;
+      background-color: #ededed;
+    }
+  </style>
+  <title>athlete-card2</title>
+</head>
+
+<body>
+  <div class="buttons">
+    <button class="duplicate"> Duplicate card </button>
+    <button class="newcolor"> Toggle background color </button>
+    <button class="something"> Something else </button>
+    <button class="delete"> Delete last card </button>
+  </div>
+  <div id="app">
+    <athlete-card2></athlete-card2>
+  </div>
+  
+
+  <script type="module" src="./src/athlete-card2.js"></script>
+  <script>
+
+    // duplicate the 1st item
+    document.querySelector('.duplicate').addEventListener('click', function(e) {
+    const itemToClone = document.querySelector('athlete-card2').cloneNode();
+    document.querySelector('#app').appendChild(itemToClone);
+  });
+
+    // change the title
+  document.querySelector('.something').addEventListener('click', function(e) {
+    let name = prompt("Name the card");
+    if (name) {
+      document.querySelector('athlete-card2').shadowRoot.querySelector('.title-header').innerText = name;
+    }
+  });
+
+    // delete the last instance of the card
+  document.querySelector('.delete').addEventListener('click', function(e) {
+    let wantsTo = confirm("Are you sure?");
+    if (wantsTo) {
+      if (document.querySelector('#app :last-child') !== document.querySelector('athlete-card2')) {
+        document.querySelector('#app :last-child').remove();      
+      }
+      else {
+        alert("Not allowed");
+      }
+    }
+  });
+  </script>
+</body>
+
+</html>
