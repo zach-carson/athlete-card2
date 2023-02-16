@@ -102,8 +102,8 @@ export class AthleteCard2 extends LitElement {
       <div class="card" id="card1">
         <div>
         <div class="title-header">
-          <h2> $(this.name) </h2>
-          <h3> $(this.position) </h3>
+          <h2>${this.name}</h2>
+          <h3>${this.position}</h3>
         </div>
         <img class = "img" src="https://th.bing.com/th/id/OIP.NX-MOMDx5uAkx4YnlPWexAHaE7?pid=ImgDet&rs=1" alt="jalen hurts">
         <p class = "desc"> Jalen Hurts is a football player </p>
