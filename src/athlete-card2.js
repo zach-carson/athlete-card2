@@ -1,4 +1,5 @@
 import { LitElement, html, css } from 'lit';
+import "@lrnwebcomponents/meme-maker/meme-maker.js";
 
 
 export class AthleteCard2 extends LitElement {
@@ -94,6 +95,7 @@ export class AthleteCard2 extends LitElement {
     super();
     this.name = 'Jalen Hurts';
     this.position = 'Quarterback';
+    this.stats = 'Lost Super Bowl 57 :(';
   }
 
   render() {
@@ -105,8 +107,19 @@ export class AthleteCard2 extends LitElement {
           <h2>${this.name}</h2>
           <h3>${this.position}</h3>
         </div>
-        <img class = "img" src="https://th.bing.com/th/id/OIP.NX-MOMDx5uAkx4YnlPWexAHaE7?pid=ImgDet&rs=1" alt="jalen hurts">
+        <meme-maker class = "img" alt = "athlete" image-url="https://th.bing.com/th/id/OIP.NX-MOMDx5uAkx4YnlPWexAHaE7?pid=ImgDet&rs=1" top-text="Jalen" bottom-text="Hurts">
+        </meme-maker>
         <p class = "desc"> Jalen Hurts is a football player </p>
+        <details class="details">
+        <summary>Career Stats</summary>
+        <div>
+          <ul>
+            <li>${this.stats}</li>
+            <slot>
+            </slot>
+          </ul>
+        </div>
+        </details>
         <!--<a href="https://hax.psu.edu/">-->
         <button class="btn" id='details'> Details </button>
         </a>
