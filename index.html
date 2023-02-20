@@ -22,8 +22,8 @@
 <body>
   <div class="buttons">
     <button class="duplicate"> Duplicate card </button>
-    <button class="newcolor"> Toggle background color </button>
-    <button class="something"> Something else </button>
+    <button data-toggle-btn class="Toggle Stats"> Toggle stats </button>
+    <button class="something"> Change Title </button>
     <button class="delete"> Delete last card </button>
   </div>
   <div id="app">
@@ -35,7 +35,7 @@
   <script>
 
     // duplicate the 1st item
-    document.querySelector('.duplicate').addEventListener('click', function(e) {
+    document.querySelector('athlete-card2').shadowRoot.querySelector('click', function(e) {
     const itemToClone = document.querySelector('athlete-card2').cloneNode();
     document.querySelector('#app').appendChild(itemToClone);
   });
@@ -44,7 +44,7 @@
   document.querySelector('.something').addEventListener('click', function(e) {
     let name = prompt("Name the card");
     if (name) {
-      document.querySelector('athlete-card2').shadowRoot.querySelector('.title-header').innerText = name;
+      document.querySelector('athlete-card2').name = name;
     }
   });
 
@@ -59,6 +59,18 @@
         alert("Not allowed");
       }
     }
+
+    // Toggles the details (stats) tag
+    document.querySelector('button[data-toggle-btn]').addEventListener('click', (e) => {
+    const details = document.querySelector('athlete-card2').shadowRoot.querySelector('details');
+    
+    if (details.getAttribute('open')) {
+      details.removeAttribute('open');
+    }
+    else {
+      details.setAttribute('open','open');    
+    }
+});
   });
   </script>
 </body>
