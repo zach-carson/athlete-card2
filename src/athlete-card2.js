@@ -1,7 +1,7 @@
 import { LitElement, html, css } from 'lit';
 import "@lrnwebcomponents/meme-maker/meme-maker.js";
 
-
+const image = new URL('../assets/jalen.jpg', import.meta.url).href;
 export class AthleteCard2 extends LitElement {
   
   static get properties() {
@@ -12,12 +12,24 @@ export class AthleteCard2 extends LitElement {
       },
       position: {
         type: String,
+      },
+      newcolor: {
+        type: String,
+        reflect: true,
+        attribute: 'newcolor'
       }
     }
   }
 
   static get styles() {
     return css `
+
+    :host([newcolor="blue"]) .card {
+      background-color: blue;
+      color: white;
+    }
+
+
     .card
     {
       background-color: grey;
@@ -93,6 +105,7 @@ export class AthleteCard2 extends LitElement {
 
   constructor() {
     super();
+    this.newcolor = "blue";
     this.name = 'Jalen Hurts';
     this.position = 'Quarterback';
     this.stats = 'Lost Super Bowl 57';
@@ -108,18 +121,16 @@ export class AthleteCard2 extends LitElement {
       <div class="card" id="card1">
         <div>
         <div class="title-header">
-          <h2><slot>${this.name}</slot></h2>
-          <h3><slot>${this.position}</slot></h3>
+          <h2>${this.name}</h2>
+          <h3>${this.position}</h3>
         </div>
-        <meme-maker class = "img" alt = "athlete" image-url="https://th.bing.com/th/id/OIP.NX-MOMDx5uAkx4YnlPWexAHaE7?pid=ImgDet&rs=1" top-text=${this.toptext} bottom-text=${this.bottomtext}>
+        <meme-maker class = "img" alt = "athlete" image-url=${image} top-text=${this.toptext} bottom-text=${this.bottomtext}>
         </meme-maker>
         <p class = "desc"> Jalen Hurts is a football player </p>
         <details class="details">
         <summary>${this.detailslabel}</summary>
         <div>
-          <ul>
-            <li>${this.stats}</li>
-          </ul>
+          <slot></slot>
         </div>
         </details>
         <a href="https://hax.psu.edu/">
