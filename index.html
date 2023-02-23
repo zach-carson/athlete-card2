@@ -15,6 +15,23 @@
       font-family: sans-serif;
       background-color: #ededed;
     }
+
+    athlete-card2[newcolor="earth"] {
+      --athlete-card-accent-color: pink;
+    }
+
+    athlete-card2[newcolor="fire"] {
+      --athlete-card-accent-color: orange;
+    }
+
+    athlete-card2[newcolor="wind"] {
+      --athlete-card-accent-color: black;
+    }
+
+    athlete-card2::part(card)
+    {
+      margin: 100px;
+    }
   </style>
   <title>athlete-card2</title>
 </head>
@@ -25,24 +42,27 @@
     <button data-toggle-btn> Toggle stats </button>
     <button class="change"> Change Title </button>
     <button class="delete"> Delete last card </button>
+    <button class="background"> Change Background </button>
   </div>
   <div id="app">
     <athlete-card2>
       <ul>
-      <li>${this.stats}</li>
+      <li>Lost Super Bowl 57</li>
       </ul>
     </athlete-card2>
   </div>
-  
+
 
   <script type="module" src="./src/athlete-card2.js"></script>
   <script>
 
+    // changing background color among various presets
+
     // duplicate the 1st item
     document.querySelector('.duplicate').addEventListener('click', function(e) {
-      const itemToClone = document.querySelector('athlete-card2').cloneNode();
-      document.querySelector('#app').appendChild(itemToClone);
-  });
+      const itemToClone = document.querySelector('athlete-card2').cloneNode(true);
+      document.querySelector("#app").appendChild(itemToClone);
+    });
 
     // change the title
   document.querySelector('.change').addEventListener('click', function(e) {
@@ -56,26 +76,38 @@
   document.querySelector('.delete').addEventListener('click', function(e) {
     let wantsTo = confirm("Are you sure?");
     if (wantsTo) {
-      if (document.querySelector('#app :last-child') !== document.querySelector('athlete-card2')) {
-        document.querySelector('#app :last-child').remove();      
+      if (document.querySelector('#app athlete-card2:last-child') != document.querySelector('athlete-card2')) {
+        document.querySelector('#app athlete-card2:last-child').remove();      
       }
       else {
         alert("Not allowed");
       }
     }
+  });
+
+  const changeColor = document.querySelector(".background");
+  changeColor.addEventListener("click", function (e) {
+    // random item in an array
+    const colors = ["fire", "water", "earth"]
+    const randomColor = colors[Math.floor(Math.random() * colors.length)];
+    document.querySelector("athlete-card2").newcolor = randomColor;
+
+  });
+
+
 
     // Toggles the details (stats) tag
     document.querySelector('button[data-toggle-btn]').addEventListener('click', (e) => {
-    const details = document.querySelector('athlete-card2').shadowRoot.querySelector('.details');
+    const details = document.querySelector('athlete-card2');
     
-    if (details.getAttribute('open')) {
-      details.removeAttribute('open');
+      if (details.querySelector('.opened') = true) {
+        details.querySelector('.opened') = false;
+        }
+        else {
+        details.querySelector('.opened') = true;
       }
-      else {
-     details.setAttribute('open','open');    
-    }
     });
-  });
+  
   </script>
 </body>
 
