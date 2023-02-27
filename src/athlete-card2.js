@@ -2,8 +2,8 @@ import { LitElement, html, css } from 'lit';
 import "@lrnwebcomponents/meme-maker/meme-maker.js";
 
 const image = new URL('../assets/jalen.jpg', import.meta.url).href;
+
 export class AthleteCard2 extends LitElement {
-  
   static get properties() {
     return {
       name: {
@@ -30,7 +30,7 @@ export class AthleteCard2 extends LitElement {
       opened: {
         type: Boolean, 
         reflect: true
-      }
+      },
     }
   }
 
@@ -160,7 +160,7 @@ export class AthleteCard2 extends LitElement {
         <meme-maker class = "img" alt = "athlete" image-url=${image} top-text=${this.toptext} bottom-text=${this.bottomtext}>
         </meme-maker>
         <p class = "desc"> Jalen Hurts is a football player </p>
-        <details class="details" .open="${this.opened}">
+        <details class="details" .open="${this.opened}" @toggle="${this.toggleEvent}" @click="${this.clickEvent}">
         <summary>${this.detailslabel}</summary>
         <div>
           <slot></slot>

@@ -45,6 +45,12 @@
     <button class="background"> Change Background </button>
   </div>
   <div id="app">
+    <athlete-card2 opened>
+      <ul>
+      <li>Lost Super Bowl 57</li>
+      </ul>
+    </athlete-card2>
+
     <athlete-card2>
       <ul>
       <li>Lost Super Bowl 57</li>
@@ -56,7 +62,12 @@
   <script type="module" src="./src/athlete-card2.js"></script>
   <script>
 
-    // changing background color among various presets
+    document.body.addEventListener('opened-changed', (e) => {
+      if (e.target === document.querySelector('athlete-card2')) 
+      {
+        document.querySelector('.details').innerText = e.detail.value ? 'Hide Details' : 'Show Details';
+      }
+    });
 
     // duplicate the 1st item
     document.querySelector('.duplicate').addEventListener('click', function(e) {
@@ -97,16 +108,22 @@
 
 
     // Toggles the details (stats) tag
-    document.querySelector('button[data-toggle-btn]').addEventListener('click', (e) => {
-    const details = document.querySelector('athlete-card2');
+    // document.querySelector('button[data-toggle-btn]').addEventListener('click', (e) => {
+    // const details = document.querySelector('athlete-card2');
     
-      if (details.querySelector('.opened') = true) {
-        details.querySelector('.opened') = false;
-        }
-        else {
-        details.querySelector('.opened') = true;
-      }
-    });
+    //  if (details.querySelector('.opened') = true) {
+    //    details.querySelector('.opened') = false;
+    //    }
+    //    else {
+    //    details.querySelector('.opened') = true;
+    //  }
+    //});
+    
+    // tried implementing toggle stats using stateful variables 
+    document.querySelector('.details').addEventListener('click', (e) => {
+      const card = document.querySelector('athlete-card2');
+      card.opened = !card.opened;
+    })
   
   </script>
 </body>
