@@ -39,7 +39,7 @@ export class AthleteCard2 extends LitElement {
 
     :host([newcolor="earth"]) .card {
       background-color: var (--athlete-card-accent-color, earth);
-      background-color: blue;
+      background-color: green;
       color: white;
     }
 
@@ -51,7 +51,7 @@ export class AthleteCard2 extends LitElement {
 
     :host([newcolor="wind"]) .card {
       background-color: var (--athlete-card-accent-color, wind);
-      background-color: green;
+      background-color: blue;
       color: white;
     }
 
@@ -126,8 +126,7 @@ export class AthleteCard2 extends LitElement {
     }
     
     
-    
-    
+
     `;
   }
 
@@ -144,8 +143,37 @@ export class AthleteCard2 extends LitElement {
     this.detailsbutton = "Details";
   }
 
+
+  toggleEvent(e) {
+    const state = this.shadowRoot.querySelector('details').getAttribute('open') === '' ? true : false;
+    this.opened = state;
+  }
+
   toggleDetails() {
     this.shadowRoot.querySelector('.details').toggleAttribute('open');
+  }
+
+  clickEvent(e) {
+    this.opened = !this.opened;
+  }
+
+  updated(changedProperties) {
+    changedProperties.forEach((oldValue, propName) => {
+      if (propName === 'opened') {
+        this.dispatchEvent(new CustomEvent('opened-changed',
+        {
+          composed: true,
+          bubbles: true,
+          cancelable: false, 
+          detail: {
+            value: this[propName]
+          }
+        }
+        ));
+        console.log('${propName} changed. oldValue: ${oldValue}');
+      }
+      
+    });
   }
 
   render() {
@@ -160,7 +188,7 @@ export class AthleteCard2 extends LitElement {
         <meme-maker class = "img" alt = "athlete" image-url=${image} top-text=${this.toptext} bottom-text=${this.bottomtext}>
         </meme-maker>
         <p class = "desc"> Jalen Hurts is a football player </p>
-        <details class="details" .open="${this.opened}" @toggle="${this.toggleEvent}" @click="${this.clickEvent}">
+        <details class="details" .open="${this.opened}" @toggle="${this.toggleEvent}">
         <summary>${this.detailslabel}</summary>
         <div>
           <slot></slot>

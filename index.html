@@ -39,19 +39,13 @@
 <body>
   <div class="buttons">
     <button class="duplicate"> Duplicate card </button>
-    <button data-toggle-btn> Toggle stats </button>
+    <button onclick="toggleDetails()" class="details"> Toggle stats </button>
     <button class="change"> Change Title </button>
     <button class="delete"> Delete last card </button>
     <button class="background"> Change Background </button>
   </div>
   <div id="app">
     <athlete-card2 opened>
-      <ul>
-      <li>Lost Super Bowl 57</li>
-      </ul>
-    </athlete-card2>
-
-    <athlete-card2>
       <ul>
       <li>Lost Super Bowl 57</li>
       </ul>
@@ -99,31 +93,22 @@
   const changeColor = document.querySelector(".background");
   changeColor.addEventListener("click", function (e) {
     // random item in an array
-    const colors = ["fire", "water", "earth"]
+    const colors = ["earth", "fire", "wind"]
     const randomColor = colors[Math.floor(Math.random() * colors.length)];
     document.querySelector("athlete-card2").newcolor = randomColor;
 
   });
 
-
-
-    // Toggles the details (stats) tag
-    // document.querySelector('button[data-toggle-btn]').addEventListener('click', (e) => {
-    // const details = document.querySelector('athlete-card2');
-    
-    //  if (details.querySelector('.opened') = true) {
-    //    details.querySelector('.opened') = false;
-    //    }
-    //    else {
-    //    details.querySelector('.opened') = true;
-    //  }
-    //});
-    
     // tried implementing toggle stats using stateful variables 
     document.querySelector('.details').addEventListener('click', (e) => {
       const card = document.querySelector('athlete-card2');
       card.opened = !card.opened;
     })
+
+    function toggleDetails() 
+    {
+      document.querySelector("athlete-card2").toggleDetails();
+    }
   
   </script>
 </body>
